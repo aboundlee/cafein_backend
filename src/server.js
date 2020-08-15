@@ -5,6 +5,8 @@ import path from 'path';
 //import passport from 'passport';
 //import { authenticateJwt } from './src/passport';
 //import { isAuthenticated } from './src/middlewares';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const createError = require('http-errors');
 const express = require('express');
@@ -80,8 +82,7 @@ app.use('/graphql', graphqlHTTP( async(request, response, graphQLParams) => ({
 
 
 //let PORT = process.env.PORT || 4000;
-let PORT = 3001;
-app.listen(PORT, () => { console.log('server start PORT ' + PORT);});
+app.listen(process.env.PORT || 3001);
 module.exports = app;
 
 
