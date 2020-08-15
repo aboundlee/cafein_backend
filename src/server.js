@@ -82,7 +82,9 @@ app.use('/graphql', graphqlHTTP( async(request, response, graphQLParams) => ({
 
 
 //let PORT = process.env.PORT || 4000;
-app.listen(process.env.PORT || 3001);
+app.listen(process.env.PORT || 3001, () =>
+  console.log("Server running on http://localhost:")
+);
 module.exports = app;
 
 
