@@ -1,0 +1,10 @@
+
+type Mutation { 
+    createOpeningHours(
+        cafeId: ID!
+        dayOfTheWeek: String!
+        open: String!
+        close: String!
+    ): Boolean!
+}
+

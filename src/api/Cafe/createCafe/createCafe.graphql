@@ -1,0 +1,10 @@
+
+type Mutation {
+  createCafe(
+    cafename: String!
+	  address: String!
+   	lat: String!
+	  lng: String!
+  	franchise: String
+  ): Cafe!
+}

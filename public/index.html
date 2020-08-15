@@ -1,0 +1,70 @@
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Kakao 지도 시작하기</title>
+
+		<link rel="stylesheet" type="text/css" href="css/index.css">
+
+		<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e7de57300d610068bc5604371e31dfdd"></script>
+
+		<!-- services와 clusterer, drawing 라이브러리 불러오기 -->
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e7de57300d610068bc5604371e31dfdd&libraries=services,clusterer,drawing"></script>
+
+
+
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">	
+
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+		
+	</head>
+    <body>
+					<div class="grey_div">
+					</div>
+      <div id="map" class="map_div"></div> 
+          <!-- Search form -->
+
+      <div class="wrapper">
+        <div class="wrap">
+          <div class="search">
+          <input type="text" class="searchTerm" placeholder="장소로 카페 찾기">
+          <button type="submit" class="searchButton">
+            <i class="fa fa-search"></i>
+          </button>
+      </div>
+
+	  </div>
+        
+
+  <!-- Grid column -->
+  <div class="col-md-2 col-lg-2 menu_button">
+<ul class="social-icons">
+  <li class="icon icon--cafe">
+    <a href="#" class="icon-a icon-aa">
+      <!--<span class="icon__name">Twitter</span>-->
+    </a>
+  </li>
+    <li class="icon icon--angellist">
+    <a href="#" class="icon-a">
+      <!--<span class="icon__name">Twitter</span>-->
+    </a>
+  </li>
+
+</ul>
+
+
+    </div>
+
+
+  </div>
+	  <script type="text/javascript" src="/script/write_markers.js"></script>
+	</body>
+
+</html>

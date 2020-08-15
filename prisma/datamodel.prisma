@@ -1,0 +1,61 @@
+type Cafe{
+	id: ID! @id
+  cafename: String!
+	address: String!
+	lat: String!
+	lng: String!
+	franchise: String
+  createdAt: DateTime! @createdAt
+
+	openingHours: [OpeningHours]
+	busy: [Busy]
+	environmentSurvey: [EnvironmentSurvey]
+	textReview: [TextReview]
+}
+
+type User{
+	id: ID! @id
+	userName : String
+	environmentSurvey: [EnvironmentSurvey]
+	textReview: [TextReview]
+}
+
+type OpeningHours{
+	id: ID! @id
+	cafe: Cafe! @relation(fields: [cafeId], references:[id], link: INLINE)
+	cafeId: ID
+	dayOfTheWeek: String!
+	open: String!
+	close: String!
+}
+
+type Busy{
+	id: ID! @id
+	cafe: Cafe! @relation(fields: [cafeId], references:[id], link: INLINE)
+	cafeId: ID
+	dayOfTheWeek: String!
+	time: String!
+	busyness: String!
+}
+
+type EnvironmentSurvey{
+	id: ID! @id
+	cafe: Cafe! @relation(fields: [cafeId], references:[id], link: INLINE)
+	cafeId: ID
+	user: User! @relation(fields: [userId], references:[id], link: INLINE)
+	userId: ID
+	loudness: String
+	cafeSize: String
+	plugin: String
+  createdAt: DateTime! @createdAt
+}
+
+type TextReview{
+	id: ID! @id
+	cafe: Cafe! @relation(fields: [cafeId], references:[id], link: INLINE)
+	cafeId: ID
+	user: User! @relation(fields: [userId], references:[id], link: INLINE)
+	userId: ID
+	review: String
+  createdAt: DateTime! @createdAt
+}

@@ -1,0 +1,61 @@
+type Cafe{
+	id: ID! 
+    cafename: String!
+	address: String!
+	lat: String!
+	lng: String!
+	franchise: String
+	create: String! 
+
+	openingHours: [OpeningHours]
+	busy: [Busy]
+	environmentSurvey: [EnvironmentSurvey]
+	textReview: [TextReview]
+}
+
+type User{
+	id: ID! 
+	userName: String
+	environmentSurvey: [EnvironmentSurvey]
+	textReview: [TextReview]
+}
+
+type OpeningHours{
+	id: ID!
+	cafe: Cafe
+	cafeId: ID!
+	dayOfTheWeek: String!
+	open: String!
+	close: String!
+}
+
+type Busy{
+	id: ID! 
+	cafe: Cafe 
+	cafeId: ID!
+	dayOfTheWeek: String!
+	time: String!
+	busyness: String!
+}
+
+type EnvironmentSurvey{
+	id: ID! 
+	cafe: Cafe
+	cafeId: ID!
+	user: User
+	userId: ID!
+	loudness: String
+	cafeSize: String
+	plugin: String
+	create: String! 
+}
+
+type TextReview{
+	id: ID! 
+	cafe: Cafe
+	cafeId: ID!
+	user: User
+	userId: ID!
+	review: String
+	create: String! 
+}
