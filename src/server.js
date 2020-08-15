@@ -1,7 +1,7 @@
 import path from 'path';
 //import './src/env';
 
-import { prisma } from '../prisma/generated/prisma-client';
+//import { prisma } from '../prisma/generated/prisma-client';
 //import passport from 'passport';
 //import { authenticateJwt } from './src/passport';
 //import { isAuthenticated } from './src/middlewares';

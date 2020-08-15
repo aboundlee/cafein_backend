@@ -8,11 +8,10 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 
 var _path = _interopRequireDefault(require("path"));
 
-var _prismaClient = require("../prisma/generated/prisma-client");
-
 var _schema = _interopRequireDefault(require("./schema.js"));
 
 //import './src/env';
+//import { prisma } from '../prisma/generated/prisma-client';
 //import passport from 'passport';
 //import { authenticateJwt } from './src/passport';
 //import { isAuthenticated } from './src/middlewares';
