@@ -3,32 +3,26 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateBusy {
-  count: Int!
-}
-
-type AggregateCafe {
-  count: Int!
-}
-
-type AggregateEnvironmentSurvey {
-  count: Int!
-}
-
-type AggregateOpeningHours {
-  count: Int!
-}
-
-type AggregateTextReview {
-  count: Int!
-}
-
-type AggregateUser {
-  count: Int!
-}
-
-type BatchPayload {
-  count: Long!
+/* GraphQL */ `type Query {
+  busy(where: BusyWhereUniqueInput!): Busy
+  busies(where: BusyWhereInput, orderBy: BusyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Busy]!
+  busiesConnection(where: BusyWhereInput, orderBy: BusyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BusyConnection!
+  cafe(where: CafeWhereUniqueInput!): Cafe
+  cafes(where: CafeWhereInput, orderBy: CafeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Cafe]!
+  cafesConnection(where: CafeWhereInput, orderBy: CafeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CafeConnection!
+  environmentSurvey(where: EnvironmentSurveyWhereUniqueInput!): EnvironmentSurvey
+  environmentSurveys(where: EnvironmentSurveyWhereInput, orderBy: EnvironmentSurveyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [EnvironmentSurvey]!
+  environmentSurveysConnection(where: EnvironmentSurveyWhereInput, orderBy: EnvironmentSurveyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EnvironmentSurveyConnection!
+  openingHours(where: OpeningHoursWhereUniqueInput!): OpeningHours
+  openingHourses(where: OpeningHoursWhereInput, orderBy: OpeningHoursOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [OpeningHours]!
+  openingHoursesConnection(where: OpeningHoursWhereInput, orderBy: OpeningHoursOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): OpeningHoursConnection!
+  textReview(where: TextReviewWhereUniqueInput!): TextReview
+  textReviews(where: TextReviewWhereInput, orderBy: TextReviewOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TextReview]!
+  textReviewsConnection(where: TextReviewWhereInput, orderBy: TextReviewOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TextReviewConnection!
+  user(where: UserWhereUniqueInput!): User
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  node(id: ID!): Node
 }
 
 type Busy {
@@ -40,212 +34,32 @@ type Busy {
   busyness: String!
 }
 
-type BusyConnection {
-  pageInfo: PageInfo!
-  edges: [BusyEdge]!
-  aggregate: AggregateBusy!
-}
-
-input BusyCreateInput {
-  id: ID
-  cafe: CafeCreateOneWithoutBusyInput!
-  cafeId: ID
-  dayOfTheWeek: String!
-  time: String!
-  busyness: String!
-}
-
-input BusyCreateManyWithoutCafeInput {
-  create: [BusyCreateWithoutCafeInput!]
-  connect: [BusyWhereUniqueInput!]
-}
-
-input BusyCreateWithoutCafeInput {
-  id: ID
-  cafeId: ID
-  dayOfTheWeek: String!
-  time: String!
-  busyness: String!
-}
-
-type BusyEdge {
-  node: Busy!
-  cursor: String!
-}
-
-enum BusyOrderByInput {
-  id_ASC
-  id_DESC
-  cafeId_ASC
-  cafeId_DESC
-  dayOfTheWeek_ASC
-  dayOfTheWeek_DESC
-  time_ASC
-  time_DESC
-  busyness_ASC
-  busyness_DESC
-}
-
-type BusyPreviousValues {
+type Cafe {
   id: ID!
+  cafename: String!
+  address: String!
+  lat: String!
+  lng: String!
+  franchise: String
+  createdAt: DateTime!
+  openingHours(where: OpeningHoursWhereInput, orderBy: OpeningHoursOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [OpeningHours!]
+  busy(where: BusyWhereInput, orderBy: BusyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Busy!]
+  environmentSurvey(where: EnvironmentSurveyWhereInput, orderBy: EnvironmentSurveyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [EnvironmentSurvey!]
+  textReview(where: TextReviewWhereInput, orderBy: TextReviewOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TextReview!]
+}
+
+scalar DateTime
+
+type OpeningHours {
+  id: ID!
+  cafe: Cafe!
   cafeId: ID
   dayOfTheWeek: String!
-  time: String!
-  busyness: String!
+  open: String!
+  close: String!
 }
 
-input BusyScalarWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  cafeId: ID
-  cafeId_not: ID
-  cafeId_in: [ID!]
-  cafeId_not_in: [ID!]
-  cafeId_lt: ID
-  cafeId_lte: ID
-  cafeId_gt: ID
-  cafeId_gte: ID
-  cafeId_contains: ID
-  cafeId_not_contains: ID
-  cafeId_starts_with: ID
-  cafeId_not_starts_with: ID
-  cafeId_ends_with: ID
-  cafeId_not_ends_with: ID
-  dayOfTheWeek: String
-  dayOfTheWeek_not: String
-  dayOfTheWeek_in: [String!]
-  dayOfTheWeek_not_in: [String!]
-  dayOfTheWeek_lt: String
-  dayOfTheWeek_lte: String
-  dayOfTheWeek_gt: String
-  dayOfTheWeek_gte: String
-  dayOfTheWeek_contains: String
-  dayOfTheWeek_not_contains: String
-  dayOfTheWeek_starts_with: String
-  dayOfTheWeek_not_starts_with: String
-  dayOfTheWeek_ends_with: String
-  dayOfTheWeek_not_ends_with: String
-  time: String
-  time_not: String
-  time_in: [String!]
-  time_not_in: [String!]
-  time_lt: String
-  time_lte: String
-  time_gt: String
-  time_gte: String
-  time_contains: String
-  time_not_contains: String
-  time_starts_with: String
-  time_not_starts_with: String
-  time_ends_with: String
-  time_not_ends_with: String
-  busyness: String
-  busyness_not: String
-  busyness_in: [String!]
-  busyness_not_in: [String!]
-  busyness_lt: String
-  busyness_lte: String
-  busyness_gt: String
-  busyness_gte: String
-  busyness_contains: String
-  busyness_not_contains: String
-  busyness_starts_with: String
-  busyness_not_starts_with: String
-  busyness_ends_with: String
-  busyness_not_ends_with: String
-  AND: [BusyScalarWhereInput!]
-  OR: [BusyScalarWhereInput!]
-  NOT: [BusyScalarWhereInput!]
-}
-
-type BusySubscriptionPayload {
-  mutation: MutationType!
-  node: Busy
-  updatedFields: [String!]
-  previousValues: BusyPreviousValues
-}
-
-input BusySubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: BusyWhereInput
-  AND: [BusySubscriptionWhereInput!]
-  OR: [BusySubscriptionWhereInput!]
-  NOT: [BusySubscriptionWhereInput!]
-}
-
-input BusyUpdateInput {
-  cafe: CafeUpdateOneRequiredWithoutBusyInput
-  cafeId: ID
-  dayOfTheWeek: String
-  time: String
-  busyness: String
-}
-
-input BusyUpdateManyDataInput {
-  cafeId: ID
-  dayOfTheWeek: String
-  time: String
-  busyness: String
-}
-
-input BusyUpdateManyMutationInput {
-  cafeId: ID
-  dayOfTheWeek: String
-  time: String
-  busyness: String
-}
-
-input BusyUpdateManyWithoutCafeInput {
-  create: [BusyCreateWithoutCafeInput!]
-  delete: [BusyWhereUniqueInput!]
-  connect: [BusyWhereUniqueInput!]
-  set: [BusyWhereUniqueInput!]
-  disconnect: [BusyWhereUniqueInput!]
-  update: [BusyUpdateWithWhereUniqueWithoutCafeInput!]
-  upsert: [BusyUpsertWithWhereUniqueWithoutCafeInput!]
-  deleteMany: [BusyScalarWhereInput!]
-  updateMany: [BusyUpdateManyWithWhereNestedInput!]
-}
-
-input BusyUpdateManyWithWhereNestedInput {
-  where: BusyScalarWhereInput!
-  data: BusyUpdateManyDataInput!
-}
-
-input BusyUpdateWithoutCafeDataInput {
-  cafeId: ID
-  dayOfTheWeek: String
-  time: String
-  busyness: String
-}
-
-input BusyUpdateWithWhereUniqueWithoutCafeInput {
-  where: BusyWhereUniqueInput!
-  data: BusyUpdateWithoutCafeDataInput!
-}
-
-input BusyUpsertWithWhereUniqueWithoutCafeInput {
-  where: BusyWhereUniqueInput!
-  update: BusyUpdateWithoutCafeDataInput!
-  create: BusyCreateWithoutCafeInput!
-}
-
-input BusyWhereInput {
+input OpeningHoursWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -289,304 +103,37 @@ input BusyWhereInput {
   dayOfTheWeek_not_starts_with: String
   dayOfTheWeek_ends_with: String
   dayOfTheWeek_not_ends_with: String
-  time: String
-  time_not: String
-  time_in: [String!]
-  time_not_in: [String!]
-  time_lt: String
-  time_lte: String
-  time_gt: String
-  time_gte: String
-  time_contains: String
-  time_not_contains: String
-  time_starts_with: String
-  time_not_starts_with: String
-  time_ends_with: String
-  time_not_ends_with: String
-  busyness: String
-  busyness_not: String
-  busyness_in: [String!]
-  busyness_not_in: [String!]
-  busyness_lt: String
-  busyness_lte: String
-  busyness_gt: String
-  busyness_gte: String
-  busyness_contains: String
-  busyness_not_contains: String
-  busyness_starts_with: String
-  busyness_not_starts_with: String
-  busyness_ends_with: String
-  busyness_not_ends_with: String
-  AND: [BusyWhereInput!]
-  OR: [BusyWhereInput!]
-  NOT: [BusyWhereInput!]
-}
-
-input BusyWhereUniqueInput {
-  id: ID
-}
-
-type Cafe {
-  id: ID!
-  cafename: String!
-  address: String!
-  lat: String!
-  lng: String!
-  franchise: String
-  createdAt: DateTime!
-  openingHours(where: OpeningHoursWhereInput, orderBy: OpeningHoursOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [OpeningHours!]
-  busy(where: BusyWhereInput, orderBy: BusyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Busy!]
-  environmentSurvey(where: EnvironmentSurveyWhereInput, orderBy: EnvironmentSurveyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [EnvironmentSurvey!]
-  textReview(where: TextReviewWhereInput, orderBy: TextReviewOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TextReview!]
-}
-
-type CafeConnection {
-  pageInfo: PageInfo!
-  edges: [CafeEdge]!
-  aggregate: AggregateCafe!
-}
-
-input CafeCreateInput {
-  id: ID
-  cafename: String!
-  address: String!
-  lat: String!
-  lng: String!
-  franchise: String
-  openingHours: OpeningHoursCreateManyWithoutCafeInput
-  busy: BusyCreateManyWithoutCafeInput
-  environmentSurvey: EnvironmentSurveyCreateManyWithoutCafeInput
-  textReview: TextReviewCreateManyWithoutCafeInput
-}
-
-input CafeCreateOneWithoutBusyInput {
-  create: CafeCreateWithoutBusyInput
-  connect: CafeWhereUniqueInput
-}
-
-input CafeCreateOneWithoutEnvironmentSurveyInput {
-  create: CafeCreateWithoutEnvironmentSurveyInput
-  connect: CafeWhereUniqueInput
-}
-
-input CafeCreateOneWithoutOpeningHoursInput {
-  create: CafeCreateWithoutOpeningHoursInput
-  connect: CafeWhereUniqueInput
-}
-
-input CafeCreateOneWithoutTextReviewInput {
-  create: CafeCreateWithoutTextReviewInput
-  connect: CafeWhereUniqueInput
-}
-
-input CafeCreateWithoutBusyInput {
-  id: ID
-  cafename: String!
-  address: String!
-  lat: String!
-  lng: String!
-  franchise: String
-  openingHours: OpeningHoursCreateManyWithoutCafeInput
-  environmentSurvey: EnvironmentSurveyCreateManyWithoutCafeInput
-  textReview: TextReviewCreateManyWithoutCafeInput
-}
-
-input CafeCreateWithoutEnvironmentSurveyInput {
-  id: ID
-  cafename: String!
-  address: String!
-  lat: String!
-  lng: String!
-  franchise: String
-  openingHours: OpeningHoursCreateManyWithoutCafeInput
-  busy: BusyCreateManyWithoutCafeInput
-  textReview: TextReviewCreateManyWithoutCafeInput
-}
-
-input CafeCreateWithoutOpeningHoursInput {
-  id: ID
-  cafename: String!
-  address: String!
-  lat: String!
-  lng: String!
-  franchise: String
-  busy: BusyCreateManyWithoutCafeInput
-  environmentSurvey: EnvironmentSurveyCreateManyWithoutCafeInput
-  textReview: TextReviewCreateManyWithoutCafeInput
-}
-
-input CafeCreateWithoutTextReviewInput {
-  id: ID
-  cafename: String!
-  address: String!
-  lat: String!
-  lng: String!
-  franchise: String
-  openingHours: OpeningHoursCreateManyWithoutCafeInput
-  busy: BusyCreateManyWithoutCafeInput
-  environmentSurvey: EnvironmentSurveyCreateManyWithoutCafeInput
-}
-
-type CafeEdge {
-  node: Cafe!
-  cursor: String!
-}
-
-enum CafeOrderByInput {
-  id_ASC
-  id_DESC
-  cafename_ASC
-  cafename_DESC
-  address_ASC
-  address_DESC
-  lat_ASC
-  lat_DESC
-  lng_ASC
-  lng_DESC
-  franchise_ASC
-  franchise_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-type CafePreviousValues {
-  id: ID!
-  cafename: String!
-  address: String!
-  lat: String!
-  lng: String!
-  franchise: String
-  createdAt: DateTime!
-}
-
-type CafeSubscriptionPayload {
-  mutation: MutationType!
-  node: Cafe
-  updatedFields: [String!]
-  previousValues: CafePreviousValues
-}
-
-input CafeSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: CafeWhereInput
-  AND: [CafeSubscriptionWhereInput!]
-  OR: [CafeSubscriptionWhereInput!]
-  NOT: [CafeSubscriptionWhereInput!]
-}
-
-input CafeUpdateInput {
-  cafename: String
-  address: String
-  lat: String
-  lng: String
-  franchise: String
-  openingHours: OpeningHoursUpdateManyWithoutCafeInput
-  busy: BusyUpdateManyWithoutCafeInput
-  environmentSurvey: EnvironmentSurveyUpdateManyWithoutCafeInput
-  textReview: TextReviewUpdateManyWithoutCafeInput
-}
-
-input CafeUpdateManyMutationInput {
-  cafename: String
-  address: String
-  lat: String
-  lng: String
-  franchise: String
-}
-
-input CafeUpdateOneRequiredWithoutBusyInput {
-  create: CafeCreateWithoutBusyInput
-  update: CafeUpdateWithoutBusyDataInput
-  upsert: CafeUpsertWithoutBusyInput
-  connect: CafeWhereUniqueInput
-}
-
-input CafeUpdateOneRequiredWithoutEnvironmentSurveyInput {
-  create: CafeCreateWithoutEnvironmentSurveyInput
-  update: CafeUpdateWithoutEnvironmentSurveyDataInput
-  upsert: CafeUpsertWithoutEnvironmentSurveyInput
-  connect: CafeWhereUniqueInput
-}
-
-input CafeUpdateOneRequiredWithoutOpeningHoursInput {
-  create: CafeCreateWithoutOpeningHoursInput
-  update: CafeUpdateWithoutOpeningHoursDataInput
-  upsert: CafeUpsertWithoutOpeningHoursInput
-  connect: CafeWhereUniqueInput
-}
-
-input CafeUpdateOneRequiredWithoutTextReviewInput {
-  create: CafeCreateWithoutTextReviewInput
-  update: CafeUpdateWithoutTextReviewDataInput
-  upsert: CafeUpsertWithoutTextReviewInput
-  connect: CafeWhereUniqueInput
-}
-
-input CafeUpdateWithoutBusyDataInput {
-  cafename: String
-  address: String
-  lat: String
-  lng: String
-  franchise: String
-  openingHours: OpeningHoursUpdateManyWithoutCafeInput
-  environmentSurvey: EnvironmentSurveyUpdateManyWithoutCafeInput
-  textReview: TextReviewUpdateManyWithoutCafeInput
-}
-
-input CafeUpdateWithoutEnvironmentSurveyDataInput {
-  cafename: String
-  address: String
-  lat: String
-  lng: String
-  franchise: String
-  openingHours: OpeningHoursUpdateManyWithoutCafeInput
-  busy: BusyUpdateManyWithoutCafeInput
-  textReview: TextReviewUpdateManyWithoutCafeInput
-}
-
-input CafeUpdateWithoutOpeningHoursDataInput {
-  cafename: String
-  address: String
-  lat: String
-  lng: String
-  franchise: String
-  busy: BusyUpdateManyWithoutCafeInput
-  environmentSurvey: EnvironmentSurveyUpdateManyWithoutCafeInput
-  textReview: TextReviewUpdateManyWithoutCafeInput
-}
-
-input CafeUpdateWithoutTextReviewDataInput {
-  cafename: String
-  address: String
-  lat: String
-  lng: String
-  franchise: String
-  openingHours: OpeningHoursUpdateManyWithoutCafeInput
-  busy: BusyUpdateManyWithoutCafeInput
-  environmentSurvey: EnvironmentSurveyUpdateManyWithoutCafeInput
-}
-
-input CafeUpsertWithoutBusyInput {
-  update: CafeUpdateWithoutBusyDataInput!
-  create: CafeCreateWithoutBusyInput!
-}
-
-input CafeUpsertWithoutEnvironmentSurveyInput {
-  update: CafeUpdateWithoutEnvironmentSurveyDataInput!
-  create: CafeCreateWithoutEnvironmentSurveyInput!
-}
-
-input CafeUpsertWithoutOpeningHoursInput {
-  update: CafeUpdateWithoutOpeningHoursDataInput!
-  create: CafeCreateWithoutOpeningHoursInput!
-}
-
-input CafeUpsertWithoutTextReviewInput {
-  update: CafeUpdateWithoutTextReviewDataInput!
-  create: CafeCreateWithoutTextReviewInput!
+  open: String
+  open_not: String
+  open_in: [String!]
+  open_not_in: [String!]
+  open_lt: String
+  open_lte: String
+  open_gt: String
+  open_gte: String
+  open_contains: String
+  open_not_contains: String
+  open_starts_with: String
+  open_not_starts_with: String
+  open_ends_with: String
+  open_not_ends_with: String
+  close: String
+  close_not: String
+  close_in: [String!]
+  close_not_in: [String!]
+  close_lt: String
+  close_lte: String
+  close_gt: String
+  close_gte: String
+  close_contains: String
+  close_not_contains: String
+  close_starts_with: String
+  close_not_starts_with: String
+  close_ends_with: String
+  close_not_ends_with: String
+  AND: [OpeningHoursWhereInput!]
+  OR: [OpeningHoursWhereInput!]
+  NOT: [OpeningHoursWhereInput!]
 }
 
 input CafeWhereInput {
@@ -699,104 +246,7 @@ input CafeWhereInput {
   NOT: [CafeWhereInput!]
 }
 
-input CafeWhereUniqueInput {
-  id: ID
-}
-
-scalar DateTime
-
-type EnvironmentSurvey {
-  id: ID!
-  cafe: Cafe!
-  cafeId: ID
-  user: User!
-  userId: ID
-  loudness: String
-  cafeSize: String
-  plugin: String
-  createdAt: DateTime!
-}
-
-type EnvironmentSurveyConnection {
-  pageInfo: PageInfo!
-  edges: [EnvironmentSurveyEdge]!
-  aggregate: AggregateEnvironmentSurvey!
-}
-
-input EnvironmentSurveyCreateInput {
-  id: ID
-  cafe: CafeCreateOneWithoutEnvironmentSurveyInput!
-  cafeId: ID
-  user: UserCreateOneWithoutEnvironmentSurveyInput!
-  userId: ID
-  loudness: String
-  cafeSize: String
-  plugin: String
-}
-
-input EnvironmentSurveyCreateManyWithoutCafeInput {
-  create: [EnvironmentSurveyCreateWithoutCafeInput!]
-  connect: [EnvironmentSurveyWhereUniqueInput!]
-}
-
-input EnvironmentSurveyCreateManyWithoutUserInput {
-  create: [EnvironmentSurveyCreateWithoutUserInput!]
-  connect: [EnvironmentSurveyWhereUniqueInput!]
-}
-
-input EnvironmentSurveyCreateWithoutCafeInput {
-  id: ID
-  cafeId: ID
-  user: UserCreateOneWithoutEnvironmentSurveyInput!
-  userId: ID
-  loudness: String
-  cafeSize: String
-  plugin: String
-}
-
-input EnvironmentSurveyCreateWithoutUserInput {
-  id: ID
-  cafe: CafeCreateOneWithoutEnvironmentSurveyInput!
-  cafeId: ID
-  userId: ID
-  loudness: String
-  cafeSize: String
-  plugin: String
-}
-
-type EnvironmentSurveyEdge {
-  node: EnvironmentSurvey!
-  cursor: String!
-}
-
-enum EnvironmentSurveyOrderByInput {
-  id_ASC
-  id_DESC
-  cafeId_ASC
-  cafeId_DESC
-  userId_ASC
-  userId_DESC
-  loudness_ASC
-  loudness_DESC
-  cafeSize_ASC
-  cafeSize_DESC
-  plugin_ASC
-  plugin_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-type EnvironmentSurveyPreviousValues {
-  id: ID!
-  cafeId: ID
-  userId: ID
-  loudness: String
-  cafeSize: String
-  plugin: String
-  createdAt: DateTime!
-}
-
-input EnvironmentSurveyScalarWhereInput {
+input BusyWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -811,6 +261,7 @@ input EnvironmentSurveyScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  cafe: CafeWhereInput
   cafeId: ID
   cafeId_not: ID
   cafeId_in: [ID!]
@@ -825,186 +276,51 @@ input EnvironmentSurveyScalarWhereInput {
   cafeId_not_starts_with: ID
   cafeId_ends_with: ID
   cafeId_not_ends_with: ID
-  userId: ID
-  userId_not: ID
-  userId_in: [ID!]
-  userId_not_in: [ID!]
-  userId_lt: ID
-  userId_lte: ID
-  userId_gt: ID
-  userId_gte: ID
-  userId_contains: ID
-  userId_not_contains: ID
-  userId_starts_with: ID
-  userId_not_starts_with: ID
-  userId_ends_with: ID
-  userId_not_ends_with: ID
-  loudness: String
-  loudness_not: String
-  loudness_in: [String!]
-  loudness_not_in: [String!]
-  loudness_lt: String
-  loudness_lte: String
-  loudness_gt: String
-  loudness_gte: String
-  loudness_contains: String
-  loudness_not_contains: String
-  loudness_starts_with: String
-  loudness_not_starts_with: String
-  loudness_ends_with: String
-  loudness_not_ends_with: String
-  cafeSize: String
-  cafeSize_not: String
-  cafeSize_in: [String!]
-  cafeSize_not_in: [String!]
-  cafeSize_lt: String
-  cafeSize_lte: String
-  cafeSize_gt: String
-  cafeSize_gte: String
-  cafeSize_contains: String
-  cafeSize_not_contains: String
-  cafeSize_starts_with: String
-  cafeSize_not_starts_with: String
-  cafeSize_ends_with: String
-  cafeSize_not_ends_with: String
-  plugin: String
-  plugin_not: String
-  plugin_in: [String!]
-  plugin_not_in: [String!]
-  plugin_lt: String
-  plugin_lte: String
-  plugin_gt: String
-  plugin_gte: String
-  plugin_contains: String
-  plugin_not_contains: String
-  plugin_starts_with: String
-  plugin_not_starts_with: String
-  plugin_ends_with: String
-  plugin_not_ends_with: String
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  AND: [EnvironmentSurveyScalarWhereInput!]
-  OR: [EnvironmentSurveyScalarWhereInput!]
-  NOT: [EnvironmentSurveyScalarWhereInput!]
-}
-
-type EnvironmentSurveySubscriptionPayload {
-  mutation: MutationType!
-  node: EnvironmentSurvey
-  updatedFields: [String!]
-  previousValues: EnvironmentSurveyPreviousValues
-}
-
-input EnvironmentSurveySubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: EnvironmentSurveyWhereInput
-  AND: [EnvironmentSurveySubscriptionWhereInput!]
-  OR: [EnvironmentSurveySubscriptionWhereInput!]
-  NOT: [EnvironmentSurveySubscriptionWhereInput!]
-}
-
-input EnvironmentSurveyUpdateInput {
-  cafe: CafeUpdateOneRequiredWithoutEnvironmentSurveyInput
-  cafeId: ID
-  user: UserUpdateOneRequiredWithoutEnvironmentSurveyInput
-  userId: ID
-  loudness: String
-  cafeSize: String
-  plugin: String
-}
-
-input EnvironmentSurveyUpdateManyDataInput {
-  cafeId: ID
-  userId: ID
-  loudness: String
-  cafeSize: String
-  plugin: String
-}
-
-input EnvironmentSurveyUpdateManyMutationInput {
-  cafeId: ID
-  userId: ID
-  loudness: String
-  cafeSize: String
-  plugin: String
-}
-
-input EnvironmentSurveyUpdateManyWithoutCafeInput {
-  create: [EnvironmentSurveyCreateWithoutCafeInput!]
-  delete: [EnvironmentSurveyWhereUniqueInput!]
-  connect: [EnvironmentSurveyWhereUniqueInput!]
-  set: [EnvironmentSurveyWhereUniqueInput!]
-  disconnect: [EnvironmentSurveyWhereUniqueInput!]
-  update: [EnvironmentSurveyUpdateWithWhereUniqueWithoutCafeInput!]
-  upsert: [EnvironmentSurveyUpsertWithWhereUniqueWithoutCafeInput!]
-  deleteMany: [EnvironmentSurveyScalarWhereInput!]
-  updateMany: [EnvironmentSurveyUpdateManyWithWhereNestedInput!]
-}
-
-input EnvironmentSurveyUpdateManyWithoutUserInput {
-  create: [EnvironmentSurveyCreateWithoutUserInput!]
-  delete: [EnvironmentSurveyWhereUniqueInput!]
-  connect: [EnvironmentSurveyWhereUniqueInput!]
-  set: [EnvironmentSurveyWhereUniqueInput!]
-  disconnect: [EnvironmentSurveyWhereUniqueInput!]
-  update: [EnvironmentSurveyUpdateWithWhereUniqueWithoutUserInput!]
-  upsert: [EnvironmentSurveyUpsertWithWhereUniqueWithoutUserInput!]
-  deleteMany: [EnvironmentSurveyScalarWhereInput!]
-  updateMany: [EnvironmentSurveyUpdateManyWithWhereNestedInput!]
-}
-
-input EnvironmentSurveyUpdateManyWithWhereNestedInput {
-  where: EnvironmentSurveyScalarWhereInput!
-  data: EnvironmentSurveyUpdateManyDataInput!
-}
-
-input EnvironmentSurveyUpdateWithoutCafeDataInput {
-  cafeId: ID
-  user: UserUpdateOneRequiredWithoutEnvironmentSurveyInput
-  userId: ID
-  loudness: String
-  cafeSize: String
-  plugin: String
-}
-
-input EnvironmentSurveyUpdateWithoutUserDataInput {
-  cafe: CafeUpdateOneRequiredWithoutEnvironmentSurveyInput
-  cafeId: ID
-  userId: ID
-  loudness: String
-  cafeSize: String
-  plugin: String
-}
-
-input EnvironmentSurveyUpdateWithWhereUniqueWithoutCafeInput {
-  where: EnvironmentSurveyWhereUniqueInput!
-  data: EnvironmentSurveyUpdateWithoutCafeDataInput!
-}
-
-input EnvironmentSurveyUpdateWithWhereUniqueWithoutUserInput {
-  where: EnvironmentSurveyWhereUniqueInput!
-  data: EnvironmentSurveyUpdateWithoutUserDataInput!
-}
-
-input EnvironmentSurveyUpsertWithWhereUniqueWithoutCafeInput {
-  where: EnvironmentSurveyWhereUniqueInput!
-  update: EnvironmentSurveyUpdateWithoutCafeDataInput!
-  create: EnvironmentSurveyCreateWithoutCafeInput!
-}
-
-input EnvironmentSurveyUpsertWithWhereUniqueWithoutUserInput {
-  where: EnvironmentSurveyWhereUniqueInput!
-  update: EnvironmentSurveyUpdateWithoutUserDataInput!
-  create: EnvironmentSurveyCreateWithoutUserInput!
+  dayOfTheWeek: String
+  dayOfTheWeek_not: String
+  dayOfTheWeek_in: [String!]
+  dayOfTheWeek_not_in: [String!]
+  dayOfTheWeek_lt: String
+  dayOfTheWeek_lte: String
+  dayOfTheWeek_gt: String
+  dayOfTheWeek_gte: String
+  dayOfTheWeek_contains: String
+  dayOfTheWeek_not_contains: String
+  dayOfTheWeek_starts_with: String
+  dayOfTheWeek_not_starts_with: String
+  dayOfTheWeek_ends_with: String
+  dayOfTheWeek_not_ends_with: String
+  time: String
+  time_not: String
+  time_in: [String!]
+  time_not_in: [String!]
+  time_lt: String
+  time_lte: String
+  time_gt: String
+  time_gte: String
+  time_contains: String
+  time_not_contains: String
+  time_starts_with: String
+  time_not_starts_with: String
+  time_ends_with: String
+  time_not_ends_with: String
+  busyness: String
+  busyness_not: String
+  busyness_in: [String!]
+  busyness_not_in: [String!]
+  busyness_lt: String
+  busyness_lte: String
+  busyness_gt: String
+  busyness_gte: String
+  busyness_contains: String
+  busyness_not_contains: String
+  busyness_starts_with: String
+  busyness_not_starts_with: String
+  busyness_ends_with: String
+  busyness_not_ends_with: String
+  AND: [BusyWhereInput!]
+  OR: [BusyWhereInput!]
+  NOT: [BusyWhereInput!]
 }
 
 input EnvironmentSurveyWhereInput {
@@ -1107,11 +423,351 @@ input EnvironmentSurveyWhereInput {
   NOT: [EnvironmentSurveyWhereInput!]
 }
 
+input UserWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  userName: String
+  userName_not: String
+  userName_in: [String!]
+  userName_not_in: [String!]
+  userName_lt: String
+  userName_lte: String
+  userName_gt: String
+  userName_gte: String
+  userName_contains: String
+  userName_not_contains: String
+  userName_starts_with: String
+  userName_not_starts_with: String
+  userName_ends_with: String
+  userName_not_ends_with: String
+  environmentSurvey_every: EnvironmentSurveyWhereInput
+  environmentSurvey_some: EnvironmentSurveyWhereInput
+  environmentSurvey_none: EnvironmentSurveyWhereInput
+  textReview_every: TextReviewWhereInput
+  textReview_some: TextReviewWhereInput
+  textReview_none: TextReviewWhereInput
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+}
+
+input TextReviewWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  cafe: CafeWhereInput
+  cafeId: ID
+  cafeId_not: ID
+  cafeId_in: [ID!]
+  cafeId_not_in: [ID!]
+  cafeId_lt: ID
+  cafeId_lte: ID
+  cafeId_gt: ID
+  cafeId_gte: ID
+  cafeId_contains: ID
+  cafeId_not_contains: ID
+  cafeId_starts_with: ID
+  cafeId_not_starts_with: ID
+  cafeId_ends_with: ID
+  cafeId_not_ends_with: ID
+  user: UserWhereInput
+  userId: ID
+  userId_not: ID
+  userId_in: [ID!]
+  userId_not_in: [ID!]
+  userId_lt: ID
+  userId_lte: ID
+  userId_gt: ID
+  userId_gte: ID
+  userId_contains: ID
+  userId_not_contains: ID
+  userId_starts_with: ID
+  userId_not_starts_with: ID
+  userId_ends_with: ID
+  userId_not_ends_with: ID
+  review: String
+  review_not: String
+  review_in: [String!]
+  review_not_in: [String!]
+  review_lt: String
+  review_lte: String
+  review_gt: String
+  review_gte: String
+  review_contains: String
+  review_not_contains: String
+  review_starts_with: String
+  review_not_starts_with: String
+  review_ends_with: String
+  review_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  AND: [TextReviewWhereInput!]
+  OR: [TextReviewWhereInput!]
+  NOT: [TextReviewWhereInput!]
+}
+
+enum OpeningHoursOrderByInput {
+  id_ASC
+  id_DESC
+  cafeId_ASC
+  cafeId_DESC
+  dayOfTheWeek_ASC
+  dayOfTheWeek_DESC
+  open_ASC
+  open_DESC
+  close_ASC
+  close_DESC
+}
+
+enum BusyOrderByInput {
+  id_ASC
+  id_DESC
+  cafeId_ASC
+  cafeId_DESC
+  dayOfTheWeek_ASC
+  dayOfTheWeek_DESC
+  time_ASC
+  time_DESC
+  busyness_ASC
+  busyness_DESC
+}
+
+type EnvironmentSurvey {
+  id: ID!
+  cafe: Cafe!
+  cafeId: ID
+  user: User!
+  userId: ID
+  loudness: String
+  cafeSize: String
+  plugin: String
+  createdAt: DateTime!
+}
+
+type User {
+  id: ID!
+  userName: String
+  environmentSurvey(where: EnvironmentSurveyWhereInput, orderBy: EnvironmentSurveyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [EnvironmentSurvey!]
+  textReview(where: TextReviewWhereInput, orderBy: TextReviewOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TextReview!]
+}
+
+enum EnvironmentSurveyOrderByInput {
+  id_ASC
+  id_DESC
+  cafeId_ASC
+  cafeId_DESC
+  userId_ASC
+  userId_DESC
+  loudness_ASC
+  loudness_DESC
+  cafeSize_ASC
+  cafeSize_DESC
+  plugin_ASC
+  plugin_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type TextReview {
+  id: ID!
+  cafe: Cafe!
+  cafeId: ID
+  user: User!
+  userId: ID
+  review: String
+  createdAt: DateTime!
+}
+
+enum TextReviewOrderByInput {
+  id_ASC
+  id_DESC
+  cafeId_ASC
+  cafeId_DESC
+  userId_ASC
+  userId_DESC
+  review_ASC
+  review_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+input BusyWhereUniqueInput {
+  id: ID
+}
+
+type BusyConnection {
+  pageInfo: PageInfo!
+  edges: [BusyEdge]!
+  aggregate: AggregateBusy!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type BusyEdge {
+  node: Busy!
+  cursor: String!
+}
+
+type AggregateBusy {
+  count: Int!
+}
+
+input CafeWhereUniqueInput {
+  id: ID
+}
+
+enum CafeOrderByInput {
+  id_ASC
+  id_DESC
+  cafename_ASC
+  cafename_DESC
+  address_ASC
+  address_DESC
+  lat_ASC
+  lat_DESC
+  lng_ASC
+  lng_DESC
+  franchise_ASC
+  franchise_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type CafeConnection {
+  pageInfo: PageInfo!
+  edges: [CafeEdge]!
+  aggregate: AggregateCafe!
+}
+
+type CafeEdge {
+  node: Cafe!
+  cursor: String!
+}
+
+type AggregateCafe {
+  count: Int!
+}
+
 input EnvironmentSurveyWhereUniqueInput {
   id: ID
 }
 
-scalar Long
+type EnvironmentSurveyConnection {
+  pageInfo: PageInfo!
+  edges: [EnvironmentSurveyEdge]!
+  aggregate: AggregateEnvironmentSurvey!
+}
+
+type EnvironmentSurveyEdge {
+  node: EnvironmentSurvey!
+  cursor: String!
+}
+
+type AggregateEnvironmentSurvey {
+  count: Int!
+}
+
+input OpeningHoursWhereUniqueInput {
+  id: ID
+}
+
+type OpeningHoursConnection {
+  pageInfo: PageInfo!
+  edges: [OpeningHoursEdge]!
+  aggregate: AggregateOpeningHours!
+}
+
+type OpeningHoursEdge {
+  node: OpeningHours!
+  cursor: String!
+}
+
+type AggregateOpeningHours {
+  count: Int!
+}
+
+input TextReviewWhereUniqueInput {
+  id: ID
+}
+
+type TextReviewConnection {
+  pageInfo: PageInfo!
+  edges: [TextReviewEdge]!
+  aggregate: AggregateTextReview!
+}
+
+type TextReviewEdge {
+  node: TextReview!
+  cursor: String!
+}
+
+type AggregateTextReview {
+  count: Int!
+}
+
+input UserWhereUniqueInput {
+  id: ID
+}
+
+enum UserOrderByInput {
+  id_ASC
+  id_DESC
+  userName_ASC
+  userName_DESC
+}
+
+type UserConnection {
+  pageInfo: PageInfo!
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
+}
+
+type UserEdge {
+  node: User!
+  cursor: String!
+}
+
+type AggregateUser {
+  count: Int!
+}
+
+interface Node {
+  id: ID!
+}
 
 type Mutation {
   createBusy(data: BusyCreateInput!): Busy!
@@ -1152,38 +808,30 @@ type Mutation {
   deleteManyUsers(where: UserWhereInput): BatchPayload!
 }
 
-enum MutationType {
-  CREATED
-  UPDATED
-  DELETED
-}
-
-interface Node {
-  id: ID!
-}
-
-type OpeningHours {
-  id: ID!
-  cafe: Cafe!
-  cafeId: ID
-  dayOfTheWeek: String!
-  open: String!
-  close: String!
-}
-
-type OpeningHoursConnection {
-  pageInfo: PageInfo!
-  edges: [OpeningHoursEdge]!
-  aggregate: AggregateOpeningHours!
-}
-
-input OpeningHoursCreateInput {
+input BusyCreateInput {
   id: ID
-  cafe: CafeCreateOneWithoutOpeningHoursInput!
+  cafe: CafeCreateOneWithoutBusyInput!
   cafeId: ID
   dayOfTheWeek: String!
-  open: String!
-  close: String!
+  time: String!
+  busyness: String!
+}
+
+input CafeCreateOneWithoutBusyInput {
+  create: CafeCreateWithoutBusyInput
+  connect: CafeWhereUniqueInput
+}
+
+input CafeCreateWithoutBusyInput {
+  id: ID
+  cafename: String!
+  address: String!
+  lat: String!
+  lng: String!
+  franchise: String
+  openingHours: OpeningHoursCreateManyWithoutCafeInput
+  environmentSurvey: EnvironmentSurveyCreateManyWithoutCafeInput
+  textReview: TextReviewCreateManyWithoutCafeInput
 }
 
 input OpeningHoursCreateManyWithoutCafeInput {
@@ -1199,30 +847,185 @@ input OpeningHoursCreateWithoutCafeInput {
   close: String!
 }
 
-type OpeningHoursEdge {
-  node: OpeningHours!
-  cursor: String!
+input EnvironmentSurveyCreateManyWithoutCafeInput {
+  create: [EnvironmentSurveyCreateWithoutCafeInput!]
+  connect: [EnvironmentSurveyWhereUniqueInput!]
 }
 
-enum OpeningHoursOrderByInput {
-  id_ASC
-  id_DESC
-  cafeId_ASC
-  cafeId_DESC
-  dayOfTheWeek_ASC
-  dayOfTheWeek_DESC
-  open_ASC
-  open_DESC
-  close_ASC
-  close_DESC
+input EnvironmentSurveyCreateWithoutCafeInput {
+  id: ID
+  cafeId: ID
+  user: UserCreateOneWithoutEnvironmentSurveyInput!
+  userId: ID
+  loudness: String
+  cafeSize: String
+  plugin: String
 }
 
-type OpeningHoursPreviousValues {
-  id: ID!
+input UserCreateOneWithoutEnvironmentSurveyInput {
+  create: UserCreateWithoutEnvironmentSurveyInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutEnvironmentSurveyInput {
+  id: ID
+  userName: String
+  textReview: TextReviewCreateManyWithoutUserInput
+}
+
+input TextReviewCreateManyWithoutUserInput {
+  create: [TextReviewCreateWithoutUserInput!]
+  connect: [TextReviewWhereUniqueInput!]
+}
+
+input TextReviewCreateWithoutUserInput {
+  id: ID
+  cafe: CafeCreateOneWithoutTextReviewInput!
+  cafeId: ID
+  userId: ID
+  review: String
+}
+
+input CafeCreateOneWithoutTextReviewInput {
+  create: CafeCreateWithoutTextReviewInput
+  connect: CafeWhereUniqueInput
+}
+
+input CafeCreateWithoutTextReviewInput {
+  id: ID
+  cafename: String!
+  address: String!
+  lat: String!
+  lng: String!
+  franchise: String
+  openingHours: OpeningHoursCreateManyWithoutCafeInput
+  busy: BusyCreateManyWithoutCafeInput
+  environmentSurvey: EnvironmentSurveyCreateManyWithoutCafeInput
+}
+
+input BusyCreateManyWithoutCafeInput {
+  create: [BusyCreateWithoutCafeInput!]
+  connect: [BusyWhereUniqueInput!]
+}
+
+input BusyCreateWithoutCafeInput {
+  id: ID
   cafeId: ID
   dayOfTheWeek: String!
-  open: String!
-  close: String!
+  time: String!
+  busyness: String!
+}
+
+input TextReviewCreateManyWithoutCafeInput {
+  create: [TextReviewCreateWithoutCafeInput!]
+  connect: [TextReviewWhereUniqueInput!]
+}
+
+input TextReviewCreateWithoutCafeInput {
+  id: ID
+  cafeId: ID
+  user: UserCreateOneWithoutTextReviewInput!
+  userId: ID
+  review: String
+}
+
+input UserCreateOneWithoutTextReviewInput {
+  create: UserCreateWithoutTextReviewInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutTextReviewInput {
+  id: ID
+  userName: String
+  environmentSurvey: EnvironmentSurveyCreateManyWithoutUserInput
+}
+
+input EnvironmentSurveyCreateManyWithoutUserInput {
+  create: [EnvironmentSurveyCreateWithoutUserInput!]
+  connect: [EnvironmentSurveyWhereUniqueInput!]
+}
+
+input EnvironmentSurveyCreateWithoutUserInput {
+  id: ID
+  cafe: CafeCreateOneWithoutEnvironmentSurveyInput!
+  cafeId: ID
+  userId: ID
+  loudness: String
+  cafeSize: String
+  plugin: String
+}
+
+input CafeCreateOneWithoutEnvironmentSurveyInput {
+  create: CafeCreateWithoutEnvironmentSurveyInput
+  connect: CafeWhereUniqueInput
+}
+
+input CafeCreateWithoutEnvironmentSurveyInput {
+  id: ID
+  cafename: String!
+  address: String!
+  lat: String!
+  lng: String!
+  franchise: String
+  openingHours: OpeningHoursCreateManyWithoutCafeInput
+  busy: BusyCreateManyWithoutCafeInput
+  textReview: TextReviewCreateManyWithoutCafeInput
+}
+
+input BusyUpdateInput {
+  cafe: CafeUpdateOneRequiredWithoutBusyInput
+  cafeId: ID
+  dayOfTheWeek: String
+  time: String
+  busyness: String
+}
+
+input CafeUpdateOneRequiredWithoutBusyInput {
+  create: CafeCreateWithoutBusyInput
+  update: CafeUpdateWithoutBusyDataInput
+  upsert: CafeUpsertWithoutBusyInput
+  connect: CafeWhereUniqueInput
+}
+
+input CafeUpdateWithoutBusyDataInput {
+  cafename: String
+  address: String
+  lat: String
+  lng: String
+  franchise: String
+  openingHours: OpeningHoursUpdateManyWithoutCafeInput
+  environmentSurvey: EnvironmentSurveyUpdateManyWithoutCafeInput
+  textReview: TextReviewUpdateManyWithoutCafeInput
+}
+
+input OpeningHoursUpdateManyWithoutCafeInput {
+  create: [OpeningHoursCreateWithoutCafeInput!]
+  delete: [OpeningHoursWhereUniqueInput!]
+  connect: [OpeningHoursWhereUniqueInput!]
+  set: [OpeningHoursWhereUniqueInput!]
+  disconnect: [OpeningHoursWhereUniqueInput!]
+  update: [OpeningHoursUpdateWithWhereUniqueWithoutCafeInput!]
+  upsert: [OpeningHoursUpsertWithWhereUniqueWithoutCafeInput!]
+  deleteMany: [OpeningHoursScalarWhereInput!]
+  updateMany: [OpeningHoursUpdateManyWithWhereNestedInput!]
+}
+
+input OpeningHoursUpdateWithWhereUniqueWithoutCafeInput {
+  where: OpeningHoursWhereUniqueInput!
+  data: OpeningHoursUpdateWithoutCafeDataInput!
+}
+
+input OpeningHoursUpdateWithoutCafeDataInput {
+  cafeId: ID
+  dayOfTheWeek: String
+  open: String
+  close: String
+}
+
+input OpeningHoursUpsertWithWhereUniqueWithoutCafeInput {
+  where: OpeningHoursWhereUniqueInput!
+  update: OpeningHoursUpdateWithoutCafeDataInput!
+  create: OpeningHoursCreateWithoutCafeInput!
 }
 
 input OpeningHoursScalarWhereInput {
@@ -1301,30 +1104,9 @@ input OpeningHoursScalarWhereInput {
   NOT: [OpeningHoursScalarWhereInput!]
 }
 
-type OpeningHoursSubscriptionPayload {
-  mutation: MutationType!
-  node: OpeningHours
-  updatedFields: [String!]
-  previousValues: OpeningHoursPreviousValues
-}
-
-input OpeningHoursSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: OpeningHoursWhereInput
-  AND: [OpeningHoursSubscriptionWhereInput!]
-  OR: [OpeningHoursSubscriptionWhereInput!]
-  NOT: [OpeningHoursSubscriptionWhereInput!]
-}
-
-input OpeningHoursUpdateInput {
-  cafe: CafeUpdateOneRequiredWithoutOpeningHoursInput
-  cafeId: ID
-  dayOfTheWeek: String
-  open: String
-  close: String
+input OpeningHoursUpdateManyWithWhereNestedInput {
+  where: OpeningHoursScalarWhereInput!
+  data: OpeningHoursUpdateManyDataInput!
 }
 
 input OpeningHoursUpdateManyDataInput {
@@ -1334,49 +1116,117 @@ input OpeningHoursUpdateManyDataInput {
   close: String
 }
 
-input OpeningHoursUpdateManyMutationInput {
+input EnvironmentSurveyUpdateManyWithoutCafeInput {
+  create: [EnvironmentSurveyCreateWithoutCafeInput!]
+  delete: [EnvironmentSurveyWhereUniqueInput!]
+  connect: [EnvironmentSurveyWhereUniqueInput!]
+  set: [EnvironmentSurveyWhereUniqueInput!]
+  disconnect: [EnvironmentSurveyWhereUniqueInput!]
+  update: [EnvironmentSurveyUpdateWithWhereUniqueWithoutCafeInput!]
+  upsert: [EnvironmentSurveyUpsertWithWhereUniqueWithoutCafeInput!]
+  deleteMany: [EnvironmentSurveyScalarWhereInput!]
+  updateMany: [EnvironmentSurveyUpdateManyWithWhereNestedInput!]
+}
+
+input EnvironmentSurveyUpdateWithWhereUniqueWithoutCafeInput {
+  where: EnvironmentSurveyWhereUniqueInput!
+  data: EnvironmentSurveyUpdateWithoutCafeDataInput!
+}
+
+input EnvironmentSurveyUpdateWithoutCafeDataInput {
+  cafeId: ID
+  user: UserUpdateOneRequiredWithoutEnvironmentSurveyInput
+  userId: ID
+  loudness: String
+  cafeSize: String
+  plugin: String
+}
+
+input UserUpdateOneRequiredWithoutEnvironmentSurveyInput {
+  create: UserCreateWithoutEnvironmentSurveyInput
+  update: UserUpdateWithoutEnvironmentSurveyDataInput
+  upsert: UserUpsertWithoutEnvironmentSurveyInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateWithoutEnvironmentSurveyDataInput {
+  userName: String
+  textReview: TextReviewUpdateManyWithoutUserInput
+}
+
+input TextReviewUpdateManyWithoutUserInput {
+  create: [TextReviewCreateWithoutUserInput!]
+  delete: [TextReviewWhereUniqueInput!]
+  connect: [TextReviewWhereUniqueInput!]
+  set: [TextReviewWhereUniqueInput!]
+  disconnect: [TextReviewWhereUniqueInput!]
+  update: [TextReviewUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [TextReviewUpsertWithWhereUniqueWithoutUserInput!]
+  deleteMany: [TextReviewScalarWhereInput!]
+  updateMany: [TextReviewUpdateManyWithWhereNestedInput!]
+}
+
+input TextReviewUpdateWithWhereUniqueWithoutUserInput {
+  where: TextReviewWhereUniqueInput!
+  data: TextReviewUpdateWithoutUserDataInput!
+}
+
+input TextReviewUpdateWithoutUserDataInput {
+  cafe: CafeUpdateOneRequiredWithoutTextReviewInput
+  cafeId: ID
+  userId: ID
+  review: String
+}
+
+input CafeUpdateOneRequiredWithoutTextReviewInput {
+  create: CafeCreateWithoutTextReviewInput
+  update: CafeUpdateWithoutTextReviewDataInput
+  upsert: CafeUpsertWithoutTextReviewInput
+  connect: CafeWhereUniqueInput
+}
+
+input CafeUpdateWithoutTextReviewDataInput {
+  cafename: String
+  address: String
+  lat: String
+  lng: String
+  franchise: String
+  openingHours: OpeningHoursUpdateManyWithoutCafeInput
+  busy: BusyUpdateManyWithoutCafeInput
+  environmentSurvey: EnvironmentSurveyUpdateManyWithoutCafeInput
+}
+
+input BusyUpdateManyWithoutCafeInput {
+  create: [BusyCreateWithoutCafeInput!]
+  delete: [BusyWhereUniqueInput!]
+  connect: [BusyWhereUniqueInput!]
+  set: [BusyWhereUniqueInput!]
+  disconnect: [BusyWhereUniqueInput!]
+  update: [BusyUpdateWithWhereUniqueWithoutCafeInput!]
+  upsert: [BusyUpsertWithWhereUniqueWithoutCafeInput!]
+  deleteMany: [BusyScalarWhereInput!]
+  updateMany: [BusyUpdateManyWithWhereNestedInput!]
+}
+
+input BusyUpdateWithWhereUniqueWithoutCafeInput {
+  where: BusyWhereUniqueInput!
+  data: BusyUpdateWithoutCafeDataInput!
+}
+
+input BusyUpdateWithoutCafeDataInput {
   cafeId: ID
   dayOfTheWeek: String
-  open: String
-  close: String
+  time: String
+  busyness: String
 }
 
-input OpeningHoursUpdateManyWithoutCafeInput {
-  create: [OpeningHoursCreateWithoutCafeInput!]
-  delete: [OpeningHoursWhereUniqueInput!]
-  connect: [OpeningHoursWhereUniqueInput!]
-  set: [OpeningHoursWhereUniqueInput!]
-  disconnect: [OpeningHoursWhereUniqueInput!]
-  update: [OpeningHoursUpdateWithWhereUniqueWithoutCafeInput!]
-  upsert: [OpeningHoursUpsertWithWhereUniqueWithoutCafeInput!]
-  deleteMany: [OpeningHoursScalarWhereInput!]
-  updateMany: [OpeningHoursUpdateManyWithWhereNestedInput!]
+input BusyUpsertWithWhereUniqueWithoutCafeInput {
+  where: BusyWhereUniqueInput!
+  update: BusyUpdateWithoutCafeDataInput!
+  create: BusyCreateWithoutCafeInput!
 }
 
-input OpeningHoursUpdateManyWithWhereNestedInput {
-  where: OpeningHoursScalarWhereInput!
-  data: OpeningHoursUpdateManyDataInput!
-}
-
-input OpeningHoursUpdateWithoutCafeDataInput {
-  cafeId: ID
-  dayOfTheWeek: String
-  open: String
-  close: String
-}
-
-input OpeningHoursUpdateWithWhereUniqueWithoutCafeInput {
-  where: OpeningHoursWhereUniqueInput!
-  data: OpeningHoursUpdateWithoutCafeDataInput!
-}
-
-input OpeningHoursUpsertWithWhereUniqueWithoutCafeInput {
-  where: OpeningHoursWhereUniqueInput!
-  update: OpeningHoursUpdateWithoutCafeDataInput!
-  create: OpeningHoursCreateWithoutCafeInput!
-}
-
-input OpeningHoursWhereInput {
+input BusyScalarWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -1391,7 +1241,6 @@ input OpeningHoursWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  cafe: CafeWhereInput
   cafeId: ID
   cafeId_not: ID
   cafeId_in: [ID!]
@@ -1420,156 +1269,60 @@ input OpeningHoursWhereInput {
   dayOfTheWeek_not_starts_with: String
   dayOfTheWeek_ends_with: String
   dayOfTheWeek_not_ends_with: String
-  open: String
-  open_not: String
-  open_in: [String!]
-  open_not_in: [String!]
-  open_lt: String
-  open_lte: String
-  open_gt: String
-  open_gte: String
-  open_contains: String
-  open_not_contains: String
-  open_starts_with: String
-  open_not_starts_with: String
-  open_ends_with: String
-  open_not_ends_with: String
-  close: String
-  close_not: String
-  close_in: [String!]
-  close_not_in: [String!]
-  close_lt: String
-  close_lte: String
-  close_gt: String
-  close_gte: String
-  close_contains: String
-  close_not_contains: String
-  close_starts_with: String
-  close_not_starts_with: String
-  close_ends_with: String
-  close_not_ends_with: String
-  AND: [OpeningHoursWhereInput!]
-  OR: [OpeningHoursWhereInput!]
-  NOT: [OpeningHoursWhereInput!]
+  time: String
+  time_not: String
+  time_in: [String!]
+  time_not_in: [String!]
+  time_lt: String
+  time_lte: String
+  time_gt: String
+  time_gte: String
+  time_contains: String
+  time_not_contains: String
+  time_starts_with: String
+  time_not_starts_with: String
+  time_ends_with: String
+  time_not_ends_with: String
+  busyness: String
+  busyness_not: String
+  busyness_in: [String!]
+  busyness_not_in: [String!]
+  busyness_lt: String
+  busyness_lte: String
+  busyness_gt: String
+  busyness_gte: String
+  busyness_contains: String
+  busyness_not_contains: String
+  busyness_starts_with: String
+  busyness_not_starts_with: String
+  busyness_ends_with: String
+  busyness_not_ends_with: String
+  AND: [BusyScalarWhereInput!]
+  OR: [BusyScalarWhereInput!]
+  NOT: [BusyScalarWhereInput!]
 }
 
-input OpeningHoursWhereUniqueInput {
-  id: ID
+input BusyUpdateManyWithWhereNestedInput {
+  where: BusyScalarWhereInput!
+  data: BusyUpdateManyDataInput!
 }
 
-type PageInfo {
-  hasNextPage: Boolean!
-  hasPreviousPage: Boolean!
-  startCursor: String
-  endCursor: String
-}
-
-type Query {
-  busy(where: BusyWhereUniqueInput!): Busy
-  busies(where: BusyWhereInput, orderBy: BusyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Busy]!
-  busiesConnection(where: BusyWhereInput, orderBy: BusyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BusyConnection!
-  cafe(where: CafeWhereUniqueInput!): Cafe
-  cafes(where: CafeWhereInput, orderBy: CafeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Cafe]!
-  cafesConnection(where: CafeWhereInput, orderBy: CafeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CafeConnection!
-  environmentSurvey(where: EnvironmentSurveyWhereUniqueInput!): EnvironmentSurvey
-  environmentSurveys(where: EnvironmentSurveyWhereInput, orderBy: EnvironmentSurveyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [EnvironmentSurvey]!
-  environmentSurveysConnection(where: EnvironmentSurveyWhereInput, orderBy: EnvironmentSurveyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EnvironmentSurveyConnection!
-  openingHours(where: OpeningHoursWhereUniqueInput!): OpeningHours
-  openingHourses(where: OpeningHoursWhereInput, orderBy: OpeningHoursOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [OpeningHours]!
-  openingHoursesConnection(where: OpeningHoursWhereInput, orderBy: OpeningHoursOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): OpeningHoursConnection!
-  textReview(where: TextReviewWhereUniqueInput!): TextReview
-  textReviews(where: TextReviewWhereInput, orderBy: TextReviewOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TextReview]!
-  textReviewsConnection(where: TextReviewWhereInput, orderBy: TextReviewOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TextReviewConnection!
-  user(where: UserWhereUniqueInput!): User
-  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
-  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
-  node(id: ID!): Node
-}
-
-type Subscription {
-  busy(where: BusySubscriptionWhereInput): BusySubscriptionPayload
-  cafe(where: CafeSubscriptionWhereInput): CafeSubscriptionPayload
-  environmentSurvey(where: EnvironmentSurveySubscriptionWhereInput): EnvironmentSurveySubscriptionPayload
-  openingHours(where: OpeningHoursSubscriptionWhereInput): OpeningHoursSubscriptionPayload
-  textReview(where: TextReviewSubscriptionWhereInput): TextReviewSubscriptionPayload
-  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
-}
-
-type TextReview {
-  id: ID!
-  cafe: Cafe!
+input BusyUpdateManyDataInput {
   cafeId: ID
-  user: User!
-  userId: ID
-  review: String
-  createdAt: DateTime!
+  dayOfTheWeek: String
+  time: String
+  busyness: String
 }
 
-type TextReviewConnection {
-  pageInfo: PageInfo!
-  edges: [TextReviewEdge]!
-  aggregate: AggregateTextReview!
+input CafeUpsertWithoutTextReviewInput {
+  update: CafeUpdateWithoutTextReviewDataInput!
+  create: CafeCreateWithoutTextReviewInput!
 }
 
-input TextReviewCreateInput {
-  id: ID
-  cafe: CafeCreateOneWithoutTextReviewInput!
-  cafeId: ID
-  user: UserCreateOneWithoutTextReviewInput!
-  userId: ID
-  review: String
-}
-
-input TextReviewCreateManyWithoutCafeInput {
-  create: [TextReviewCreateWithoutCafeInput!]
-  connect: [TextReviewWhereUniqueInput!]
-}
-
-input TextReviewCreateManyWithoutUserInput {
-  create: [TextReviewCreateWithoutUserInput!]
-  connect: [TextReviewWhereUniqueInput!]
-}
-
-input TextReviewCreateWithoutCafeInput {
-  id: ID
-  cafeId: ID
-  user: UserCreateOneWithoutTextReviewInput!
-  userId: ID
-  review: String
-}
-
-input TextReviewCreateWithoutUserInput {
-  id: ID
-  cafe: CafeCreateOneWithoutTextReviewInput!
-  cafeId: ID
-  userId: ID
-  review: String
-}
-
-type TextReviewEdge {
-  node: TextReview!
-  cursor: String!
-}
-
-enum TextReviewOrderByInput {
-  id_ASC
-  id_DESC
-  cafeId_ASC
-  cafeId_DESC
-  userId_ASC
-  userId_DESC
-  review_ASC
-  review_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-type TextReviewPreviousValues {
-  id: ID!
-  cafeId: ID
-  userId: ID
-  review: String
-  createdAt: DateTime!
+input TextReviewUpsertWithWhereUniqueWithoutUserInput {
+  where: TextReviewWhereUniqueInput!
+  update: TextReviewUpdateWithoutUserDataInput!
+  create: TextReviewCreateWithoutUserInput!
 }
 
 input TextReviewScalarWhereInput {
@@ -1642,30 +1395,9 @@ input TextReviewScalarWhereInput {
   NOT: [TextReviewScalarWhereInput!]
 }
 
-type TextReviewSubscriptionPayload {
-  mutation: MutationType!
-  node: TextReview
-  updatedFields: [String!]
-  previousValues: TextReviewPreviousValues
-}
-
-input TextReviewSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: TextReviewWhereInput
-  AND: [TextReviewSubscriptionWhereInput!]
-  OR: [TextReviewSubscriptionWhereInput!]
-  NOT: [TextReviewSubscriptionWhereInput!]
-}
-
-input TextReviewUpdateInput {
-  cafe: CafeUpdateOneRequiredWithoutTextReviewInput
-  cafeId: ID
-  user: UserUpdateOneRequiredWithoutTextReviewInput
-  userId: ID
-  review: String
+input TextReviewUpdateManyWithWhereNestedInput {
+  where: TextReviewScalarWhereInput!
+  data: TextReviewUpdateManyDataInput!
 }
 
 input TextReviewUpdateManyDataInput {
@@ -1674,78 +1406,18 @@ input TextReviewUpdateManyDataInput {
   review: String
 }
 
-input TextReviewUpdateManyMutationInput {
-  cafeId: ID
-  userId: ID
-  review: String
+input UserUpsertWithoutEnvironmentSurveyInput {
+  update: UserUpdateWithoutEnvironmentSurveyDataInput!
+  create: UserCreateWithoutEnvironmentSurveyInput!
 }
 
-input TextReviewUpdateManyWithoutCafeInput {
-  create: [TextReviewCreateWithoutCafeInput!]
-  delete: [TextReviewWhereUniqueInput!]
-  connect: [TextReviewWhereUniqueInput!]
-  set: [TextReviewWhereUniqueInput!]
-  disconnect: [TextReviewWhereUniqueInput!]
-  update: [TextReviewUpdateWithWhereUniqueWithoutCafeInput!]
-  upsert: [TextReviewUpsertWithWhereUniqueWithoutCafeInput!]
-  deleteMany: [TextReviewScalarWhereInput!]
-  updateMany: [TextReviewUpdateManyWithWhereNestedInput!]
+input EnvironmentSurveyUpsertWithWhereUniqueWithoutCafeInput {
+  where: EnvironmentSurveyWhereUniqueInput!
+  update: EnvironmentSurveyUpdateWithoutCafeDataInput!
+  create: EnvironmentSurveyCreateWithoutCafeInput!
 }
 
-input TextReviewUpdateManyWithoutUserInput {
-  create: [TextReviewCreateWithoutUserInput!]
-  delete: [TextReviewWhereUniqueInput!]
-  connect: [TextReviewWhereUniqueInput!]
-  set: [TextReviewWhereUniqueInput!]
-  disconnect: [TextReviewWhereUniqueInput!]
-  update: [TextReviewUpdateWithWhereUniqueWithoutUserInput!]
-  upsert: [TextReviewUpsertWithWhereUniqueWithoutUserInput!]
-  deleteMany: [TextReviewScalarWhereInput!]
-  updateMany: [TextReviewUpdateManyWithWhereNestedInput!]
-}
-
-input TextReviewUpdateManyWithWhereNestedInput {
-  where: TextReviewScalarWhereInput!
-  data: TextReviewUpdateManyDataInput!
-}
-
-input TextReviewUpdateWithoutCafeDataInput {
-  cafeId: ID
-  user: UserUpdateOneRequiredWithoutTextReviewInput
-  userId: ID
-  review: String
-}
-
-input TextReviewUpdateWithoutUserDataInput {
-  cafe: CafeUpdateOneRequiredWithoutTextReviewInput
-  cafeId: ID
-  userId: ID
-  review: String
-}
-
-input TextReviewUpdateWithWhereUniqueWithoutCafeInput {
-  where: TextReviewWhereUniqueInput!
-  data: TextReviewUpdateWithoutCafeDataInput!
-}
-
-input TextReviewUpdateWithWhereUniqueWithoutUserInput {
-  where: TextReviewWhereUniqueInput!
-  data: TextReviewUpdateWithoutUserDataInput!
-}
-
-input TextReviewUpsertWithWhereUniqueWithoutCafeInput {
-  where: TextReviewWhereUniqueInput!
-  update: TextReviewUpdateWithoutCafeDataInput!
-  create: TextReviewCreateWithoutCafeInput!
-}
-
-input TextReviewUpsertWithWhereUniqueWithoutUserInput {
-  where: TextReviewWhereUniqueInput!
-  update: TextReviewUpdateWithoutUserDataInput!
-  create: TextReviewCreateWithoutUserInput!
-}
-
-input TextReviewWhereInput {
+input EnvironmentSurveyScalarWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -1760,7 +1432,6 @@ input TextReviewWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  cafe: CafeWhereInput
   cafeId: ID
   cafeId_not: ID
   cafeId_in: [ID!]
@@ -1775,7 +1446,6 @@ input TextReviewWhereInput {
   cafeId_not_starts_with: ID
   cafeId_ends_with: ID
   cafeId_not_ends_with: ID
-  user: UserWhereInput
   userId: ID
   userId_not: ID
   userId_in: [ID!]
@@ -1790,20 +1460,48 @@ input TextReviewWhereInput {
   userId_not_starts_with: ID
   userId_ends_with: ID
   userId_not_ends_with: ID
-  review: String
-  review_not: String
-  review_in: [String!]
-  review_not_in: [String!]
-  review_lt: String
-  review_lte: String
-  review_gt: String
-  review_gte: String
-  review_contains: String
-  review_not_contains: String
-  review_starts_with: String
-  review_not_starts_with: String
-  review_ends_with: String
-  review_not_ends_with: String
+  loudness: String
+  loudness_not: String
+  loudness_in: [String!]
+  loudness_not_in: [String!]
+  loudness_lt: String
+  loudness_lte: String
+  loudness_gt: String
+  loudness_gte: String
+  loudness_contains: String
+  loudness_not_contains: String
+  loudness_starts_with: String
+  loudness_not_starts_with: String
+  loudness_ends_with: String
+  loudness_not_ends_with: String
+  cafeSize: String
+  cafeSize_not: String
+  cafeSize_in: [String!]
+  cafeSize_not_in: [String!]
+  cafeSize_lt: String
+  cafeSize_lte: String
+  cafeSize_gt: String
+  cafeSize_gte: String
+  cafeSize_contains: String
+  cafeSize_not_contains: String
+  cafeSize_starts_with: String
+  cafeSize_not_starts_with: String
+  cafeSize_ends_with: String
+  cafeSize_not_ends_with: String
+  plugin: String
+  plugin_not: String
+  plugin_in: [String!]
+  plugin_not_in: [String!]
+  plugin_lt: String
+  plugin_lte: String
+  plugin_gt: String
+  plugin_gte: String
+  plugin_contains: String
+  plugin_not_contains: String
+  plugin_starts_with: String
+  plugin_not_starts_with: String
+  plugin_ends_with: String
+  plugin_not_ends_with: String
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -1812,26 +1510,291 @@ input TextReviewWhereInput {
   createdAt_lte: DateTime
   createdAt_gt: DateTime
   createdAt_gte: DateTime
-  AND: [TextReviewWhereInput!]
-  OR: [TextReviewWhereInput!]
-  NOT: [TextReviewWhereInput!]
+  AND: [EnvironmentSurveyScalarWhereInput!]
+  OR: [EnvironmentSurveyScalarWhereInput!]
+  NOT: [EnvironmentSurveyScalarWhereInput!]
 }
 
-input TextReviewWhereUniqueInput {
-  id: ID
+input EnvironmentSurveyUpdateManyWithWhereNestedInput {
+  where: EnvironmentSurveyScalarWhereInput!
+  data: EnvironmentSurveyUpdateManyDataInput!
 }
 
-type User {
-  id: ID!
+input EnvironmentSurveyUpdateManyDataInput {
+  cafeId: ID
+  userId: ID
+  loudness: String
+  cafeSize: String
+  plugin: String
+}
+
+input TextReviewUpdateManyWithoutCafeInput {
+  create: [TextReviewCreateWithoutCafeInput!]
+  delete: [TextReviewWhereUniqueInput!]
+  connect: [TextReviewWhereUniqueInput!]
+  set: [TextReviewWhereUniqueInput!]
+  disconnect: [TextReviewWhereUniqueInput!]
+  update: [TextReviewUpdateWithWhereUniqueWithoutCafeInput!]
+  upsert: [TextReviewUpsertWithWhereUniqueWithoutCafeInput!]
+  deleteMany: [TextReviewScalarWhereInput!]
+  updateMany: [TextReviewUpdateManyWithWhereNestedInput!]
+}
+
+input TextReviewUpdateWithWhereUniqueWithoutCafeInput {
+  where: TextReviewWhereUniqueInput!
+  data: TextReviewUpdateWithoutCafeDataInput!
+}
+
+input TextReviewUpdateWithoutCafeDataInput {
+  cafeId: ID
+  user: UserUpdateOneRequiredWithoutTextReviewInput
+  userId: ID
+  review: String
+}
+
+input UserUpdateOneRequiredWithoutTextReviewInput {
+  create: UserCreateWithoutTextReviewInput
+  update: UserUpdateWithoutTextReviewDataInput
+  upsert: UserUpsertWithoutTextReviewInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateWithoutTextReviewDataInput {
   userName: String
-  environmentSurvey(where: EnvironmentSurveyWhereInput, orderBy: EnvironmentSurveyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [EnvironmentSurvey!]
-  textReview(where: TextReviewWhereInput, orderBy: TextReviewOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TextReview!]
+  environmentSurvey: EnvironmentSurveyUpdateManyWithoutUserInput
 }
 
-type UserConnection {
-  pageInfo: PageInfo!
-  edges: [UserEdge]!
-  aggregate: AggregateUser!
+input EnvironmentSurveyUpdateManyWithoutUserInput {
+  create: [EnvironmentSurveyCreateWithoutUserInput!]
+  delete: [EnvironmentSurveyWhereUniqueInput!]
+  connect: [EnvironmentSurveyWhereUniqueInput!]
+  set: [EnvironmentSurveyWhereUniqueInput!]
+  disconnect: [EnvironmentSurveyWhereUniqueInput!]
+  update: [EnvironmentSurveyUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [EnvironmentSurveyUpsertWithWhereUniqueWithoutUserInput!]
+  deleteMany: [EnvironmentSurveyScalarWhereInput!]
+  updateMany: [EnvironmentSurveyUpdateManyWithWhereNestedInput!]
+}
+
+input EnvironmentSurveyUpdateWithWhereUniqueWithoutUserInput {
+  where: EnvironmentSurveyWhereUniqueInput!
+  data: EnvironmentSurveyUpdateWithoutUserDataInput!
+}
+
+input EnvironmentSurveyUpdateWithoutUserDataInput {
+  cafe: CafeUpdateOneRequiredWithoutEnvironmentSurveyInput
+  cafeId: ID
+  userId: ID
+  loudness: String
+  cafeSize: String
+  plugin: String
+}
+
+input CafeUpdateOneRequiredWithoutEnvironmentSurveyInput {
+  create: CafeCreateWithoutEnvironmentSurveyInput
+  update: CafeUpdateWithoutEnvironmentSurveyDataInput
+  upsert: CafeUpsertWithoutEnvironmentSurveyInput
+  connect: CafeWhereUniqueInput
+}
+
+input CafeUpdateWithoutEnvironmentSurveyDataInput {
+  cafename: String
+  address: String
+  lat: String
+  lng: String
+  franchise: String
+  openingHours: OpeningHoursUpdateManyWithoutCafeInput
+  busy: BusyUpdateManyWithoutCafeInput
+  textReview: TextReviewUpdateManyWithoutCafeInput
+}
+
+input CafeUpsertWithoutEnvironmentSurveyInput {
+  update: CafeUpdateWithoutEnvironmentSurveyDataInput!
+  create: CafeCreateWithoutEnvironmentSurveyInput!
+}
+
+input EnvironmentSurveyUpsertWithWhereUniqueWithoutUserInput {
+  where: EnvironmentSurveyWhereUniqueInput!
+  update: EnvironmentSurveyUpdateWithoutUserDataInput!
+  create: EnvironmentSurveyCreateWithoutUserInput!
+}
+
+input UserUpsertWithoutTextReviewInput {
+  update: UserUpdateWithoutTextReviewDataInput!
+  create: UserCreateWithoutTextReviewInput!
+}
+
+input TextReviewUpsertWithWhereUniqueWithoutCafeInput {
+  where: TextReviewWhereUniqueInput!
+  update: TextReviewUpdateWithoutCafeDataInput!
+  create: TextReviewCreateWithoutCafeInput!
+}
+
+input CafeUpsertWithoutBusyInput {
+  update: CafeUpdateWithoutBusyDataInput!
+  create: CafeCreateWithoutBusyInput!
+}
+
+type BatchPayload {
+  count: Long!
+}
+
+scalar Long
+
+input BusyUpdateManyMutationInput {
+  cafeId: ID
+  dayOfTheWeek: String
+  time: String
+  busyness: String
+}
+
+input CafeCreateInput {
+  id: ID
+  cafename: String!
+  address: String!
+  lat: String!
+  lng: String!
+  franchise: String
+  openingHours: OpeningHoursCreateManyWithoutCafeInput
+  busy: BusyCreateManyWithoutCafeInput
+  environmentSurvey: EnvironmentSurveyCreateManyWithoutCafeInput
+  textReview: TextReviewCreateManyWithoutCafeInput
+}
+
+input CafeUpdateInput {
+  cafename: String
+  address: String
+  lat: String
+  lng: String
+  franchise: String
+  openingHours: OpeningHoursUpdateManyWithoutCafeInput
+  busy: BusyUpdateManyWithoutCafeInput
+  environmentSurvey: EnvironmentSurveyUpdateManyWithoutCafeInput
+  textReview: TextReviewUpdateManyWithoutCafeInput
+}
+
+input CafeUpdateManyMutationInput {
+  cafename: String
+  address: String
+  lat: String
+  lng: String
+  franchise: String
+}
+
+input EnvironmentSurveyCreateInput {
+  id: ID
+  cafe: CafeCreateOneWithoutEnvironmentSurveyInput!
+  cafeId: ID
+  user: UserCreateOneWithoutEnvironmentSurveyInput!
+  userId: ID
+  loudness: String
+  cafeSize: String
+  plugin: String
+}
+
+input EnvironmentSurveyUpdateInput {
+  cafe: CafeUpdateOneRequiredWithoutEnvironmentSurveyInput
+  cafeId: ID
+  user: UserUpdateOneRequiredWithoutEnvironmentSurveyInput
+  userId: ID
+  loudness: String
+  cafeSize: String
+  plugin: String
+}
+
+input EnvironmentSurveyUpdateManyMutationInput {
+  cafeId: ID
+  userId: ID
+  loudness: String
+  cafeSize: String
+  plugin: String
+}
+
+input OpeningHoursCreateInput {
+  id: ID
+  cafe: CafeCreateOneWithoutOpeningHoursInput!
+  cafeId: ID
+  dayOfTheWeek: String!
+  open: String!
+  close: String!
+}
+
+input CafeCreateOneWithoutOpeningHoursInput {
+  create: CafeCreateWithoutOpeningHoursInput
+  connect: CafeWhereUniqueInput
+}
+
+input CafeCreateWithoutOpeningHoursInput {
+  id: ID
+  cafename: String!
+  address: String!
+  lat: String!
+  lng: String!
+  franchise: String
+  busy: BusyCreateManyWithoutCafeInput
+  environmentSurvey: EnvironmentSurveyCreateManyWithoutCafeInput
+  textReview: TextReviewCreateManyWithoutCafeInput
+}
+
+input OpeningHoursUpdateInput {
+  cafe: CafeUpdateOneRequiredWithoutOpeningHoursInput
+  cafeId: ID
+  dayOfTheWeek: String
+  open: String
+  close: String
+}
+
+input CafeUpdateOneRequiredWithoutOpeningHoursInput {
+  create: CafeCreateWithoutOpeningHoursInput
+  update: CafeUpdateWithoutOpeningHoursDataInput
+  upsert: CafeUpsertWithoutOpeningHoursInput
+  connect: CafeWhereUniqueInput
+}
+
+input CafeUpdateWithoutOpeningHoursDataInput {
+  cafename: String
+  address: String
+  lat: String
+  lng: String
+  franchise: String
+  busy: BusyUpdateManyWithoutCafeInput
+  environmentSurvey: EnvironmentSurveyUpdateManyWithoutCafeInput
+  textReview: TextReviewUpdateManyWithoutCafeInput
+}
+
+input CafeUpsertWithoutOpeningHoursInput {
+  update: CafeUpdateWithoutOpeningHoursDataInput!
+  create: CafeCreateWithoutOpeningHoursInput!
+}
+
+input OpeningHoursUpdateManyMutationInput {
+  cafeId: ID
+  dayOfTheWeek: String
+  open: String
+  close: String
+}
+
+input TextReviewCreateInput {
+  id: ID
+  cafe: CafeCreateOneWithoutTextReviewInput!
+  cafeId: ID
+  user: UserCreateOneWithoutTextReviewInput!
+  userId: ID
+  review: String
+}
+
+input TextReviewUpdateInput {
+  cafe: CafeUpdateOneRequiredWithoutTextReviewInput
+  cafeId: ID
+  user: UserUpdateOneRequiredWithoutTextReviewInput
+  userId: ID
+  review: String
+}
+
+input TextReviewUpdateManyMutationInput {
+  cafeId: ID
+  userId: ID
+  review: String
 }
 
 input UserCreateInput {
@@ -1839,63 +1802,6 @@ input UserCreateInput {
   userName: String
   environmentSurvey: EnvironmentSurveyCreateManyWithoutUserInput
   textReview: TextReviewCreateManyWithoutUserInput
-}
-
-input UserCreateOneWithoutEnvironmentSurveyInput {
-  create: UserCreateWithoutEnvironmentSurveyInput
-  connect: UserWhereUniqueInput
-}
-
-input UserCreateOneWithoutTextReviewInput {
-  create: UserCreateWithoutTextReviewInput
-  connect: UserWhereUniqueInput
-}
-
-input UserCreateWithoutEnvironmentSurveyInput {
-  id: ID
-  userName: String
-  textReview: TextReviewCreateManyWithoutUserInput
-}
-
-input UserCreateWithoutTextReviewInput {
-  id: ID
-  userName: String
-  environmentSurvey: EnvironmentSurveyCreateManyWithoutUserInput
-}
-
-type UserEdge {
-  node: User!
-  cursor: String!
-}
-
-enum UserOrderByInput {
-  id_ASC
-  id_DESC
-  userName_ASC
-  userName_DESC
-}
-
-type UserPreviousValues {
-  id: ID!
-  userName: String
-}
-
-type UserSubscriptionPayload {
-  mutation: MutationType!
-  node: User
-  updatedFields: [String!]
-  previousValues: UserPreviousValues
-}
-
-input UserSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: UserWhereInput
-  AND: [UserSubscriptionWhereInput!]
-  OR: [UserSubscriptionWhereInput!]
-  NOT: [UserSubscriptionWhereInput!]
 }
 
 input UserUpdateInput {
@@ -1908,82 +1814,176 @@ input UserUpdateManyMutationInput {
   userName: String
 }
 
-input UserUpdateOneRequiredWithoutEnvironmentSurveyInput {
-  create: UserCreateWithoutEnvironmentSurveyInput
-  update: UserUpdateWithoutEnvironmentSurveyDataInput
-  upsert: UserUpsertWithoutEnvironmentSurveyInput
-  connect: UserWhereUniqueInput
+type Subscription {
+  busy(where: BusySubscriptionWhereInput): BusySubscriptionPayload
+  cafe(where: CafeSubscriptionWhereInput): CafeSubscriptionPayload
+  environmentSurvey(where: EnvironmentSurveySubscriptionWhereInput): EnvironmentSurveySubscriptionPayload
+  openingHours(where: OpeningHoursSubscriptionWhereInput): OpeningHoursSubscriptionPayload
+  textReview(where: TextReviewSubscriptionWhereInput): TextReviewSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 
-input UserUpdateOneRequiredWithoutTextReviewInput {
-  create: UserCreateWithoutTextReviewInput
-  update: UserUpdateWithoutTextReviewDataInput
-  upsert: UserUpsertWithoutTextReviewInput
-  connect: UserWhereUniqueInput
+type BusySubscriptionPayload {
+  mutation: MutationType!
+  node: Busy
+  updatedFields: [String!]
+  previousValues: BusyPreviousValues
 }
 
-input UserUpdateWithoutEnvironmentSurveyDataInput {
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+type BusyPreviousValues {
+  id: ID!
+  cafeId: ID
+  dayOfTheWeek: String!
+  time: String!
+  busyness: String!
+}
+
+input BusySubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: BusyWhereInput
+  AND: [BusySubscriptionWhereInput!]
+  OR: [BusySubscriptionWhereInput!]
+  NOT: [BusySubscriptionWhereInput!]
+}
+
+type CafeSubscriptionPayload {
+  mutation: MutationType!
+  node: Cafe
+  updatedFields: [String!]
+  previousValues: CafePreviousValues
+}
+
+type CafePreviousValues {
+  id: ID!
+  cafename: String!
+  address: String!
+  lat: String!
+  lng: String!
+  franchise: String
+  createdAt: DateTime!
+}
+
+input CafeSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: CafeWhereInput
+  AND: [CafeSubscriptionWhereInput!]
+  OR: [CafeSubscriptionWhereInput!]
+  NOT: [CafeSubscriptionWhereInput!]
+}
+
+type EnvironmentSurveySubscriptionPayload {
+  mutation: MutationType!
+  node: EnvironmentSurvey
+  updatedFields: [String!]
+  previousValues: EnvironmentSurveyPreviousValues
+}
+
+type EnvironmentSurveyPreviousValues {
+  id: ID!
+  cafeId: ID
+  userId: ID
+  loudness: String
+  cafeSize: String
+  plugin: String
+  createdAt: DateTime!
+}
+
+input EnvironmentSurveySubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: EnvironmentSurveyWhereInput
+  AND: [EnvironmentSurveySubscriptionWhereInput!]
+  OR: [EnvironmentSurveySubscriptionWhereInput!]
+  NOT: [EnvironmentSurveySubscriptionWhereInput!]
+}
+
+type OpeningHoursSubscriptionPayload {
+  mutation: MutationType!
+  node: OpeningHours
+  updatedFields: [String!]
+  previousValues: OpeningHoursPreviousValues
+}
+
+type OpeningHoursPreviousValues {
+  id: ID!
+  cafeId: ID
+  dayOfTheWeek: String!
+  open: String!
+  close: String!
+}
+
+input OpeningHoursSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: OpeningHoursWhereInput
+  AND: [OpeningHoursSubscriptionWhereInput!]
+  OR: [OpeningHoursSubscriptionWhereInput!]
+  NOT: [OpeningHoursSubscriptionWhereInput!]
+}
+
+type TextReviewSubscriptionPayload {
+  mutation: MutationType!
+  node: TextReview
+  updatedFields: [String!]
+  previousValues: TextReviewPreviousValues
+}
+
+type TextReviewPreviousValues {
+  id: ID!
+  cafeId: ID
+  userId: ID
+  review: String
+  createdAt: DateTime!
+}
+
+input TextReviewSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: TextReviewWhereInput
+  AND: [TextReviewSubscriptionWhereInput!]
+  OR: [TextReviewSubscriptionWhereInput!]
+  NOT: [TextReviewSubscriptionWhereInput!]
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  node: User
+  updatedFields: [String!]
+  previousValues: UserPreviousValues
+}
+
+type UserPreviousValues {
+  id: ID!
   userName: String
-  textReview: TextReviewUpdateManyWithoutUserInput
 }
 
-input UserUpdateWithoutTextReviewDataInput {
-  userName: String
-  environmentSurvey: EnvironmentSurveyUpdateManyWithoutUserInput
-}
-
-input UserUpsertWithoutEnvironmentSurveyInput {
-  update: UserUpdateWithoutEnvironmentSurveyDataInput!
-  create: UserCreateWithoutEnvironmentSurveyInput!
-}
-
-input UserUpsertWithoutTextReviewInput {
-  update: UserUpdateWithoutTextReviewDataInput!
-  create: UserCreateWithoutTextReviewInput!
-}
-
-input UserWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  userName: String
-  userName_not: String
-  userName_in: [String!]
-  userName_not_in: [String!]
-  userName_lt: String
-  userName_lte: String
-  userName_gt: String
-  userName_gte: String
-  userName_contains: String
-  userName_not_contains: String
-  userName_starts_with: String
-  userName_not_starts_with: String
-  userName_ends_with: String
-  userName_not_ends_with: String
-  environmentSurvey_every: EnvironmentSurveyWhereInput
-  environmentSurvey_some: EnvironmentSurveyWhereInput
-  environmentSurvey_none: EnvironmentSurveyWhereInput
-  textReview_every: TextReviewWhereInput
-  textReview_some: TextReviewWhereInput
-  textReview_none: TextReviewWhereInput
-  AND: [UserWhereInput!]
-  OR: [UserWhereInput!]
-  NOT: [UserWhereInput!]
-}
-
-input UserWhereUniqueInput {
-  id: ID
+input UserSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: UserWhereInput
+  AND: [UserSubscriptionWhereInput!]
+  OR: [UserSubscriptionWhereInput!]
+  NOT: [UserSubscriptionWhereInput!]
 }
 `
       }

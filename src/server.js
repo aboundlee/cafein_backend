@@ -25,7 +25,8 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var graphqlHTTP = require('express-graphql');
+
+const { graphqlHTTP } = require('express-graphql');
 
 var indexRouter = require('../routes/index');
 //var usersRouter = require('./routes/users');
