@@ -2,3 +2,4 @@
 .next
 generated
 build
+node_modules
