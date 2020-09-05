@@ -8,6 +8,8 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 
 var _path = _interopRequireDefault(require("path"));
 
+var _dotenv = _interopRequireDefault(require("dotenv"));
+
 var _schema = _interopRequireDefault(require("./schema.js"));
 
 //import './src/env';
@@ -15,6 +17,8 @@ var _schema = _interopRequireDefault(require("./schema.js"));
 //import passport from 'passport';
 //import { authenticateJwt } from './src/passport';
 //import { isAuthenticated } from './src/middlewares';
+_dotenv["default"].config();
+
 var createError = require('http-errors');
 
 var express = require('express');
@@ -105,8 +109,7 @@ app.use('/graphql', graphqlHTTP( /*#__PURE__*/function () {
   };
 }())); //let PORT = process.env.PORT || 4000;
 
-var PORT = 3001;
-app.listen(PORT, function () {
-  console.log('server start PORT ' + PORT);
+app.listen(process.env.PORT || 3001, function () {
+  return console.log("Server running on http://localhost:");
 });
 module.exports = app;
