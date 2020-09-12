@@ -33,8 +33,6 @@ type Busy{
 	id: ID! 
 	cafe: Cafe 
 	cafeId: ID!
-	dayOfTheWeek: String!
-	time: String!
 	busyness: String!
 }
 

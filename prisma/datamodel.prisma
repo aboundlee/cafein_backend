@@ -33,8 +33,6 @@ type Busy{
 	id: ID! @id
 	cafe: Cafe! @relation(fields: [cafeId], references:[id], link: INLINE)
 	cafeId: ID
-	dayOfTheWeek: String!
-	time: String!
 	busyness: String!
 }
 
