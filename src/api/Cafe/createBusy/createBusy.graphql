@@ -2,8 +2,6 @@
 type Mutation { 
     createBusy(
         cafeId: ID!
-        dayOfTheWeek: String!
-        time: String!
         busyness: String!
     ): Boolean!
 }

@@ -3,14 +3,17 @@ import { prisma } from './../../../../prisma/generated/prisma-client';
 export default {
   Mutation: {
     createBusy: async(_, args, request) => {
-      const { cafeId, dayOfTheWeek, time, busyness } = args;
+      const { cafeId, busyness } = args;
       try {
+
+			     /*
 						const validDayOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday","Thursday", "Friday", "Saturday"];
 
 						// dayOfTheWeek 데이터 형태체크 
 						if (!validDayOfWeek.includes(dayOfTheWeek)) {
 							return false;
 						}
+						*/
 
         const cafe = await prisma.cafe({id: cafeId});
         if (!cafe) {
@@ -18,14 +21,8 @@ export default {
         }
         // Busy 데이터 있는지 체크
         const existingBusy = await prisma.$exists.busy({
-          AND: [
-						{cafeId: cafe.id},
-            {dayOfTheWeek},
-            {time}
-          ]
+						cafeId: cafe.id
         });
-			console.log(dayOfTheWeek);
-			console.log(time);
 
         if (existingBusy) {
           return false;
@@ -34,8 +31,6 @@ export default {
         const busy = await prisma.createBusy({
             cafe: { connect: {id: cafe.id} },
 						cafeId: cafe.id,
-            dayOfTheWeek,
-            time,
             busyness
         });
             
